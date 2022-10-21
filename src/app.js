@@ -42,9 +42,19 @@ function displayTemp(response) {
     iconElement.setAttribute("alt", response.data.condition.description);
 }
 
-let apiKey = "f17boc23c2b2f34d1ab3d2t904991752";
-let city = "Tokyo";
+function search(city) {
+    let apiKey = "f17boc23c2b2f34d1ab3d2t904991752";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayTemp);
+}
 
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+function handleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city-input");
+    search(cityInputElement.value);
+}
 
-axios.get(apiUrl).then(displayTemp);
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
