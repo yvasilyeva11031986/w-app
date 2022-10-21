@@ -18,6 +18,7 @@ li {
     list-style: none;
     color: #9aa0a6;
     display: block;
+    text-transform: capitalize;
     font-family: Google Sans,arial,sans-serif;
     font-size: 16px;
     font-weight: 100;
