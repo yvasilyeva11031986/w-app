@@ -23,8 +23,6 @@ function formatDate(timestamp) {
 
 
 function displayTemp(response) {
-    console.log(response.data);
-    //console.log(response.data.temperature.current);
     let temperatureElement = document.querySelector("#temp");
     temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     let cityElement = document.querySelector("#city");
@@ -40,6 +38,21 @@ function displayTemp(response) {
     let iconElement = document.querySelector("#icon");
     iconElement.setAttribute("src", response.data.condition.icon_url);
     iconElement.setAttribute("alt", response.data.condition.description);
+
+    celsiusTemp = response.data.temperature.current;
+}
+
+function displayFarenhiteTemp(event) {
+    event.preventDefault();
+    let farenhiteTemp = (celsiusTemp * 9)/5 + 32;
+    let temperatureElem = document.querySelector("#temp");
+    temperatureElem.innerHTML = Math.round(farenhiteTemp);
+}
+
+function displayCelsiusTemp(event) {
+    event.preventDefault();
+    let temperatureElem = document.querySelector("#temp");
+    temperatureElem.innerHTML = Math.round(celsiusTemp);
 }
 
 function search(city) {
@@ -54,7 +67,13 @@ function handleSubmit(event) {
     search(cityInputElement.value);
 }
 
-
+let celsiusTemp = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let farenhite = document.querySelector("#farenhite");
+farenhite.addEventListener("click", displayFarenhiteTemp);
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", displayCelsiusTemp)
