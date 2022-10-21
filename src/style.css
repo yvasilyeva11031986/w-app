@@ -18,12 +18,15 @@ li {
     list-style: none;
     color: #9aa0a6;
     display: block;
-    text-transform: capitalize;
     font-family: Google Sans,arial,sans-serif;
     font-size: 16px;
     font-weight: 100;
     line-height: 19.2px;
 }
+
+li:first-letter {
+    text-transform: capitalized;
+ }
 
 .weather-app-wrapper {
     max-width: 600px;
@@ -58,3 +61,4 @@ li {
     position: relative;
     font-size: 16px;
  }
+
