@@ -21,7 +21,8 @@ function formatDate(timestamp) {
     return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+    console.log(response.data.daily);
     let forecastElenment = document.querySelector("#forecast");
     
     let forecastHTML = `<div class="row">`;
@@ -40,8 +41,16 @@ function displayForecast() {
     forecastElenment.innerHTML = forecastHTML;
 }
 
+function getForecast(city) {
+    console.log(city);
+    let apiKey = "f17boc23c2b2f34d1ab3d2t904991752";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+    console.log(apiUrl);
+    axios.get(apiUrl).then(displayForecast);
+}
 
 function displayTemp(response) {
+    console.log(response.data.city);
     let temperatureElement = document.querySelector("#temp");
     temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     let cityElement = document.querySelector("#city");
@@ -59,6 +68,8 @@ function displayTemp(response) {
     iconElement.setAttribute("alt", response.data.condition.description);
 
     celsiusTemp = response.data.temperature.current;
+
+    getForecast(response.data.city);
 }
 
 function displayFarenhiteTemp(event) {
@@ -88,7 +99,7 @@ function handleSubmit(event) {
 
 let celsiusTemp = null;
 
-displayForecast();
+//displayForecast();
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
