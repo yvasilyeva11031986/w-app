@@ -21,6 +21,25 @@ function formatDate(timestamp) {
     return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+    let forecastElenment = document.querySelector("#forecast");
+    
+    let forecastHTML = `<div class="row">`;
+    let days =["THU", "FRI", "SAT", "SUN", "MON", "TUE"];
+    days.forEach(function(day) {
+        forecastHTML += `
+        <div class="col-2">
+                <div class="weather-forecast-date">${day}</div>
+                <img src="https://static.vecteezy.com/system/resources/previews/001/500/512/non_2x/cloudy-weather-icon-free-vector.jpg" alt="Weather" width="36"/>
+                <div class="weather-forecast-temp"><span.weather-forecast-temp-max>18</span><span class="weather-forecast-temp-min">12</span></div>
+        </div>
+        `;
+    })
+
+    forecastHTML += `</div>`;
+    forecastElenment.innerHTML = forecastHTML;
+}
+
 
 function displayTemp(response) {
     let temperatureElement = document.querySelector("#temp");
@@ -68,6 +87,8 @@ function handleSubmit(event) {
 }
 
 let celsiusTemp = null;
+
+displayForecast();
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
